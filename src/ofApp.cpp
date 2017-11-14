@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    if (nWorlds == 1) { worldY[0] += 190; }
+    if (nWorlds == 1)  worldY[0] += 190; 
     for (int i=0;i<nControls; i++) {
         controlX[i] = 50 + controlX[i] * 75;
         controlImage[i].load(controlImageFilename[i]);
@@ -12,8 +12,7 @@ void ofApp::setup(){
     
     for (int i=0; i<nWorlds; i++) {
       background[i].load("background.png");
-      player[i].load(playerImage[i]);
-        
+
       // the world bounds
       bounds[i].set(0, 0, worldW, worldH);
      
@@ -21,23 +20,36 @@ void ofApp::setup(){
       box2d[i].setFPS(60);
       box2d[i].setGravity(gravityX, gravityY);
       box2d[i].createBounds(bounds[0]);
-      box2d[i].registerGrabbing();
+      //box2d[i].registerGrabbing();
     }
+    // add player
+        player.push_back(shared_ptr<FluxlyPlayer>(new FluxlyPlayer));
+        FluxlyPlayer * p = player.back().get();
+        p->setPhysics(.5, 0, .3);
+        p->setRotationFriction(19.0);
+        p->setup(box2d[0].getWorld(), 250+ofRandom(-50, 50), 10, 32, 70);
     
-    // add some boxes to world A
-    for(int i=0; i<10; i++) {
-        shared_ptr<ofxBox2dRect> c = shared_ptr<ofxBox2dRect>(new ofxBox2dRect);
-        c.get()->setPhysics(1, 0.5, 1);
-        c.get()->setup(box2d[0].getWorld(), ofRandom(-50, 50), ofRandom(-50, 50), ofRandom(10,30), ofRandom(10,30));
-        circlesA.push_back(c);
+    // add some boxes to world
+    for(int i=0; i<20; i++) {
+        boxen.push_back(shared_ptr<FluxlyBox>(new FluxlyBox));
+        FluxlyBox * b = boxen.back().get();
+        float w = ofRandom(20,40);
+        b->setPhysics(1, 0.5, 1);
+        b->setup(box2d[0].getWorld(), 250+ofRandom(-50, 50), 10, w, w);
+        b->color.r = ofRandom(0, 255);
+        b->color.g = ofRandom(0, 255);
+        b->color.b = ofRandom(0, 255);
     }
-
-    // add some cirlces to world B
-    for(int i=0; i<10; i++) {
-        shared_ptr<ofxBox2dCircle> c = shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle);
-        c.get()->setPhysics(1, 0.5, 1);
-        c.get()->setup(box2d[1].getWorld(), 250+ofRandom(-50, 50), 10, ofRandom(10,30));
-        circlesB.push_back(c);
+    //add some circles
+    for(int i=0; i<20; i++) {
+        circles.push_back(shared_ptr<FluxlyCircle>(new FluxlyCircle));
+        FluxlyCircle * c = circles.back().get();
+        float r = ofRandom(8, 16);
+        c->setPhysics(1, 0.5, 1);
+        c->setup(box2d[0].getWorld(), 250+ofRandom(-50, 50), 10, r);
+        c->color.r = ofRandom(0, 255);
+        c->color.g = ofRandom(0, 255);
+        c->color.b = ofRandom(0, 255);
     }
     vagRounded.load("vag.ttf", 32);
 }
@@ -72,16 +84,15 @@ void ofApp::update(){
     }
     
     box2d[0].setGravity(gravityX, gravityY);
-    box2d[1].setGravity(gravityX, gravityY);
-    eventString = ofToString(gravityY);
+    //box2d[1].setGravity(gravityX, gravityY);
+    //eventString = ofToString(gravityY);
     
     box2d[0].update();
-    box2d[1].update();
-    
+    //box2d[1].update();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw(){  
     ofBackground(0, 0, 0);
     for (int w=0; w < nWorlds; w++) {
         ofSetHexColor(0xFFFFFF);
@@ -107,22 +118,25 @@ void ofApp::draw(){
             }
         }
     }
+
+    // A World
+    player[0].get()->draw();
     
-    // A World Circles
-    for (int i=0; i<circlesA.size(); i++) {
-        ofSetHexColor(0xBFE364);
-        circlesA[i].get()->draw();
+    for (int i=0; i<boxen.size(); i++) {
+        boxen[i].get()->draw();
     }
     
-    // B World Circles
-    ofPushMatrix();
+    for (int i=0; i<circles.size(); i++) {
+        circles[i].get()->draw();
+    }
+    
+    // B World
+    
+   /* ofPushMatrix();
     ofTranslate(worldX[1], worldY[1]);
-    for (int i=0; i<circlesB.size(); i++) {
-        ofSetHexColor(0xE83AAB);
-        circlesB[i].get()->draw();
-    }
     ofPopMatrix();
-    vagRounded.drawString(eventString, 98,198);
+    */
+    //vagRounded.drawString(eventString, 98,198);
 }
 
 //--------------------------------------------------------------

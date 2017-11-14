@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
+#include "FluxlyClasses.h"
 
 #define nControls (18)
 #define nWorlds (2)
@@ -83,7 +84,6 @@ class ofApp : public ofBaseApp{
     
     ofImage controlImage[nControls];
     ofImage background[nWorlds];
-    ofImage player[nWorlds];
     
     string controlImageFilename[nControls] = {
         "pauseMore.png", "left.png", "up.png", "down.png", "right.png", "lessGravity.png",
@@ -96,9 +96,13 @@ class ofApp : public ofBaseApp{
     
     ofxBox2d                 box2d[nWorlds];
     
-    vector <shared_ptr<ofxBox2dRect> >  circlesA;
-    vector <shared_ptr<ofxBox2dCircle> >  circlesB;
-    vector <shared_ptr<ofxBox2dRect> >    sharedRects;
+    vector <shared_ptr<FluxlyPlayer> > player;
+    vector <shared_ptr<FluxlyBox> > boxen;
+    vector <shared_ptr<ofxBox2dRect> > clouds;
+    vector <shared_ptr<ofxBox2dRect> > lightning;
+    vector <shared_ptr<FluxlyCircle> > circles;
+    vector <shared_ptr<ofxBox2dCircle> > bubbles;
+    
     
     ofRectangle bounds[nWorlds];
 		

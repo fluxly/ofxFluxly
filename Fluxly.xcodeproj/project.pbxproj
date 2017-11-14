@@ -166,6 +166,7 @@
 		993ABED49FEC53956339BB6C /* del_interface.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = del_interface.hpp; path = ../../../addons/ofxBox2d/libs/triangle/del_interface.hpp; sourceTree = SOURCE_ROOT; };
 		993DA2BF507B037B97E6FA16 /* b2PolygonContact.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2PolygonContact.cpp; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/Contacts/b2PolygonContact.cpp; sourceTree = SOURCE_ROOT; };
 		9B868B25E5784F27CBC75D45 /* b2Draw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2Draw.cpp; path = ../../../addons/ofxBox2d/libs/Box2D/Common/b2Draw.cpp; sourceTree = SOURCE_ROOT; };
+		9D7E77251FBB32A20045CDC0 /* FluxlyClasses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FluxlyClasses.h; sourceTree = "<group>"; };
 		9DB9C0A81FB3F2E200F475C1 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9DB9C0A91FB3F2E200F475C1 /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
 		9DB9C0AA1FB3F2E200F475C1 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
@@ -581,6 +582,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				9D7E77251FBB32A20045CDC0 /* FluxlyClasses.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
